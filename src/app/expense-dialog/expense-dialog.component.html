@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>Add Members</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-9">
+        <mat-form-field>
+          <input formControlName="name"
+                 placeholder="Expense Name"
+                 autocomplete="off"
+                 matInput>
+        </mat-form-field>
+      </div>
+      <div class="col-3">
+        <mat-form-field>
+          <input formControlName="amount"
+                 placeholder="Amount"
+                 type="number"
+                 matInput>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field>
+      <mat-label>Select Payer</mat-label>
+      <mat-select formControlName="payer">
+        <mat-option *ngFor="let member of memberService.members" [value]="member">{{member.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select Consumers</mat-label>
+      <mat-select [multiple]="true" formControlName="consumers">
+        <mat-option *ngFor="let member of memberService.members" [value]="member">{{member.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button [disabled]="form.invalid"
+          color="primary"
+          (click)="saveExpense()"
+          mat-flat-button>
+    {{isEditMode ? 'Save' : 'Add'}}
+  </button>
+</div>

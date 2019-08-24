@@ -1,0 +1,15 @@
+<div class="heading">
+  <h2>2. Expenses</h2>
+  <button [disabled]="memberService.members.length < 2"
+          (click)="openExpenseDialog()"
+          color="primary"
+          mat-stroked-button>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<ed-table [config]="tableConfig"
+          (editItem)="openExpenseDialog($event)"
+          (removeItem)="memberService.removeExpense($event)"
+          #tableComponent>
+</ed-table>
+<p *ngIf="memberService.expenses.length > 0">Total Amount: <strong>{{totalAmount | number}}</strong></p>

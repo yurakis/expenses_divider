@@ -1,0 +1,35 @@
+<table [dataSource]="config.items" mat-table matSort #matTable>
+  <ng-container *ngFor="let column of config.columns" [matColumnDef]="column.displayProperty">
+    <th *matHeaderCellDef
+        [style.width]="column.width ? column.width + 'px' : 'auto'"
+        mat-header-cell
+        mat-sort-header>
+      {{column.displayName}}
+    </th>
+    <td *matCellDef="let item" mat-cell>{{column.transformFn ? column.transformFn(item) : item[column.displayProperty]}}</td>
+  </ng-container>
+  <ng-container *ngIf="config.actions" matColumnDef="actions">
+    <th *matHeaderCellDef class="actions-header-cell" mat-header-cell>Actions</th>
+    <td *matCellDef="let item" class="actions-cell" mat-cell>
+      <button *ngIf="config.actions.edit"
+              (click)="editItem.emit(item)"
+              type="button"
+              class="btn-plain">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="config.actions.remove"
+              (click)="onRemove($event)"
+              type="button"
+              class="btn-plain">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>
+
+<div *ngIf="!config.items?.length" class="no-data-container">
+  <em>No data</em>
+</div>

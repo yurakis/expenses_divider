@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+img {
+  max-width: 100%;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #fbfbfb;
+}
+
+.btn-plain {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+}
+
+.mat-dialog-container {
+  background-color: #fff;
+  color: #000;
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-stepper-horizontal {
+  background: transparent;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+  }
+}

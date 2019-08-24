@@ -1,0 +1,11 @@
+<div class="heading">
+  <h2>1. Members</h2>
+  <button (click)="openMemberDialog()" color="primary" mat-stroked-button>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<ed-table [config]="tableConfig"
+          (editItem)="openMemberDialog($event)"
+          (removeItem)="memberService.removeMember($event)"
+          #tableComponent>
+</ed-table>

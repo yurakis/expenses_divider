@@ -1,0 +1,23 @@
+.container {
+  background-color: #fff;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+ed-results {
+  display: inline-block;
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 20px;
+  position: relative;
+
+  &::before {
+    content: '';
+    height: 3px;
+    background-color: #ccc;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+}

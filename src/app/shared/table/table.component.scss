@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+.actions-header-cell {
+  width: 75px;
+  text-align: right;
+}
+
+.actions-cell {
+  text-align: right;
+
+  .mat-icon {
+    font-size: 18px;
+  }
+}
+
+.no-data-container {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
