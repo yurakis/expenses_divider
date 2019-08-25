@@ -2,7 +2,7 @@ import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 
-import { IsAliveComponent, MemberService, ResultItem, Results, TableComponent, TableConfig } from '../shared';
+import { WithTableComponent, MemberService, ResultItem, Results, TableComponent, TableConfig } from '../shared';
 
 @Component({
   selector: 'ed-results',
@@ -11,20 +11,25 @@ import { IsAliveComponent, MemberService, ResultItem, Results, TableComponent, T
   providers: [DecimalPipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ResultsComponent extends IsAliveComponent implements OnInit {
-  @ViewChild('tableComponent', {static: true}) tableComponent: TableComponent;
-  tableConfig: TableConfig;
+export class ResultsComponent extends WithTableComponent implements OnInit {
   results: Results;
 
   constructor(
     public memberService: MemberService,
-    private changeDetector: ChangeDetectorRef,
+    protected changeDetector: ChangeDetectorRef,
     private decimalPipe: DecimalPipe
   ) {
-    super();
+    super(changeDetector);
   }
 
   ngOnInit(): void {
+    this.setTableConfig();
+    this.memberService.resultsChange$
+      .pipe(takeWhile(() => this.isAlive))
+      .subscribe(() => this.updateResults());
+  }
+
+  protected setTableConfig(): void {
     this.results = [];
     this.tableConfig = {
       items: this.results,
@@ -43,10 +48,6 @@ export class ResultsComponent extends IsAliveComponent implements OnInit {
         }
       ]
     };
-
-    this.memberService.resultsChange$
-      .pipe(takeWhile(() => this.isAlive))
-      .subscribe(() => this.updateResults());
   }
 
   private updateResults() {
@@ -67,8 +68,6 @@ export class ResultsComponent extends IsAliveComponent implements OnInit {
         const foundResult = this.results.find((resultItem) => resultItem.from === consumer && resultItem.to === expense.payer);
         const amount = expense.amount / expense.consumers.length;
 
-        console.log(foundResult);
-
         if (foundResult) {
           foundResult.amount += amount;
         } else {
@@ -81,7 +80,6 @@ export class ResultsComponent extends IsAliveComponent implements OnInit {
       });
     });
 
-    this.tableComponent.updateTable();
-    this.changeDetector.markForCheck();
+    this.updateView();
   }
 }

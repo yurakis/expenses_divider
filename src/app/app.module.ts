@@ -5,6 +5,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatSelectModule,
+  MatSnackBarModule,
   MatTableModule
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
@@ -43,7 +44,8 @@ const dialogs = [
     MatDialogModule,
     MatInputModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   entryComponents: [...dialogs],
   bootstrap: [AppComponent]

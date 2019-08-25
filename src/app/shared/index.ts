@@ -1,4 +1,4 @@
-export * from './is-alive.component';
+export * from './with-table.component';
 export * from './member.model';
 export * from './member.service';
 export * from './table.model';

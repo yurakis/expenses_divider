@@ -3,16 +3,18 @@
   <mat-form-field>
     <input [formControl]="nameControl"
            (keydown.enter)="saveMember()"
-           placeholder="Member Name"
+           placeholder="Member Name *"
            autocomplete="off"
            matInput>
+    <mat-error *ngIf="nameControl.touched && errorMessage">{{errorMessage}}</mat-error>
   </mat-form-field>
+  <pre>{{nameControl.errors | json}}</pre>
 </div>
 <div mat-dialog-actions>
   <button mat-flat-button mat-dialog-close>Cancel</button>
   <button [disabled]="nameControl.invalid"
-          color="primary"
           (click)="saveMember()"
+          color="primary"
           mat-flat-button>
     {{isEditMode ? 'Save' : 'Add'}}
   </button>

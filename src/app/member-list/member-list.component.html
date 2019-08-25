@@ -6,6 +6,6 @@
 </div>
 <ed-table [config]="tableConfig"
           (editItem)="openMemberDialog($event)"
-          (removeItem)="memberService.removeMember($event)"
+          (removeItem)="removeMember($event)"
           #tableComponent>
 </ed-table>
