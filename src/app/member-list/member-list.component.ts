@@ -81,7 +81,7 @@ export class MemberListComponent extends WithTableComponent implements OnInit {
         },
         {
           width: 80,
-          displayName: 'Money spent',
+          displayName: 'Money Spent',
           transformFn: (member: Member) => this.transformNumber(this.getMemberMoneySpentAmount(member))
         }
       ]
