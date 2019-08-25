@@ -4,7 +4,7 @@ import { TableComponent } from './table/table.component';
 
 export abstract class WithTableComponent implements OnDestroy {
   @ViewChild('tableComponent', {static: true}) tableComponent: TableComponent;
-  protected tableConfig: TableConfig;
+  public tableConfig: TableConfig;
   protected isAlive = true;
 
   protected constructor(protected changeDetector: ChangeDetectorRef) {}
