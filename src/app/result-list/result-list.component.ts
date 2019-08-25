@@ -36,11 +36,11 @@ export class ResultListComponent extends WithTableComponent implements OnInit {
       items: this.results,
       columns: [
         {
-          displayName: 'From',
+          displayName: 'Debtor',
           transformFn: ({from}: ResultItem) => from.name
         },
         {
-          displayName: 'To',
+          displayName: 'Creditor',
           transformFn: ({to}: ResultItem) => to.name
         },
         {
