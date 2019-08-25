@@ -111,23 +111,23 @@ export class ResultListComponent extends WithTableComponent implements OnInit {
     /**
      * Step 3. Results Optimization
      */
+    const findResult = (from, to) => results.find((item) => item.from === from && item.to === to);
+
     results.forEach((resultItem) => {
       const foundResultItems = results
-        .filter((item) => {
-          return item.to === resultItem.from &&
-            results.findIndex(({from, to}) => from === item.from && to === resultItem.to) > -1;
-        })
+        .filter((item) => item.to === resultItem.from && Boolean(findResult(item.from, resultItem.to)))
         .sort((a, b) => a.amount - b.amount);
 
       foundResultItems.forEach((item) => {
         const amountDiff = resultItem.amount - item.amount;
+        const foundResult = findResult(item.from, resultItem.to);
 
         if (amountDiff > 0) {
+          foundResult.amount += item.amount;
           resultItem.amount = amountDiff;
-          results.find(({from, to}) => from === item.from && to === resultItem.to).amount += item.amount;
           item.amount = 0;
         } else {
-          results.find(({from, to}) => from === item.from && to === resultItem.to).amount += resultItem.amount;
+          foundResult.amount += resultItem.amount;
           resultItem.amount = 0;
           item.amount = Math.abs(amountDiff);
         }
