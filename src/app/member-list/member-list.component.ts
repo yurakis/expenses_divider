@@ -76,16 +76,27 @@ export class MemberListComponent extends WithTableComponent implements OnInit {
         },
         {
           width: 80,
-          displayName: 'Money Spent',
-          transformFn: (member: Member) => this.transformNumber(this.getMemberTotalExpensesAmount(member))
+          displayName: 'Money Payed',
+          transformFn: (member: Member) => this.transformNumber(this.getMemberMoneyPayedAmount(member))
+        },
+        {
+          width: 80,
+          displayName: 'Money spent',
+          transformFn: (member: Member) => this.transformNumber(this.getMemberMoneySpentAmount(member))
         }
       ]
     };
   }
 
-  private getMemberTotalExpensesAmount(member: Member): number {
+  private getMemberMoneyPayedAmount(member: Member): number {
     return this.memberService.expenses
       .filter(({payer}) => payer === member)
       .reduce((sum, {amount}) => sum += amount, 0);
+  }
+
+  private getMemberMoneySpentAmount(member: Member): number {
+    return this.memberService.expenses
+      .filter(({consumers}) => consumers.includes(member))
+      .reduce((sum, {amount, consumers}) => sum += amount / consumers.length, 0);
   }
 }

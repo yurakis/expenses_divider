@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
@@ -7,7 +7,8 @@ import { Member, MemberService } from '../shared';
 @Component({
   selector: 'ed-member-dialog',
   templateUrl: './member-dialog.component.html',
-  styleUrls: ['./member-dialog.component.scss']
+  styleUrls: ['./member-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberDialogComponent implements OnInit {
   nameControl: FormControl;
