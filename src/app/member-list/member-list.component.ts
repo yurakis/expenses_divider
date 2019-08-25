@@ -1,10 +1,10 @@
 import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { filter, takeWhile } from 'rxjs/operators';
 
 import { MemberDialogComponent } from '../member-dialog/member-dialog.component';
-import { WithTableComponent, Member, MemberService, TableComponent, TableConfig } from '../shared';
+import { WithTableComponent, Member, MemberService } from '../shared';
 
 @Component({
   selector: 'ed-member-list',
@@ -17,11 +17,11 @@ export class MemberListComponent extends WithTableComponent implements OnInit {
   constructor(
     public memberService: MemberService,
     protected changeDetector: ChangeDetectorRef,
+    protected decimalPipe: DecimalPipe,
     private matDialog: MatDialog,
-    private matSnackBar: MatSnackBar,
-    private decimalPipe: DecimalPipe
+    private matSnackBar: MatSnackBar
   ) {
-    super(changeDetector);
+    super(changeDetector, decimalPipe);
   }
 
   ngOnInit(): void {
@@ -77,7 +77,7 @@ export class MemberListComponent extends WithTableComponent implements OnInit {
         {
           width: 80,
           displayName: 'Money Spent',
-          transformFn: (member: Member) => this.decimalPipe.transform(this.getMemberTotalExpensesAmount(member))
+          transformFn: (member: Member) => this.transformNumber(this.getMemberTotalExpensesAmount(member))
         }
       ]
     };

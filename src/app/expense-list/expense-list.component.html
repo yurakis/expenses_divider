@@ -12,4 +12,4 @@
           (removeItem)="memberService.removeExpense($event)"
           #tableComponent>
 </ed-table>
-<p *ngIf="memberService.expenses.length > 0">Total Amount: <strong>{{totalAmount | number}}</strong></p>
+<p *ngIf="memberService.expenses.length > 0">Total Amount: <strong>{{transformNumber(totalAmount)}}</strong></p>

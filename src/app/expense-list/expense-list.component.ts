@@ -17,10 +17,10 @@ export class ExpenseListComponent extends WithTableComponent implements OnInit {
   constructor(
     public memberService: MemberService,
     protected changeDetector: ChangeDetectorRef,
-    private matDialog: MatDialog,
-    private decimalPipe: DecimalPipe
+    protected decimalPipe: DecimalPipe,
+    private matDialog: MatDialog
   ) {
-    super(changeDetector);
+    super(changeDetector, decimalPipe);
   }
 
   ngOnInit(): void {
@@ -66,7 +66,7 @@ export class ExpenseListComponent extends WithTableComponent implements OnInit {
         {
           width: 50,
           displayName: 'Amount',
-          transformFn: ({amount}: Expense) => this.decimalPipe.transform(amount)
+          transformFn: ({amount}: Expense) => this.transformNumber(amount)
         },
         {
           displayName: 'Payer',
@@ -74,6 +74,7 @@ export class ExpenseListComponent extends WithTableComponent implements OnInit {
         },
         {
           displayName: 'Consumers',
+          width: 180,
           transformFn: ({consumers}: Expense) => consumers.map(({name}) => name).join(', ')
         }
       ]

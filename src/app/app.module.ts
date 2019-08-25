@@ -15,9 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ExpenseDialogComponent } from './expense-dialog/expense-dialog.component';
 import { MemberDialogComponent } from './member-dialog/member-dialog.component';
-import { ResultsComponent } from './results/results.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { ExpenseListComponent } from './expense-list/expense-list.component';
+import { ResultListComponent } from './result-list/result-list.component';
 import { TableComponent } from './shared';
 
 const dialogs = [
@@ -30,7 +30,7 @@ const dialogs = [
     ...dialogs,
     AppComponent,
     MemberDialogComponent,
-    ResultsComponent,
+    ResultListComponent,
     MemberListComponent,
     ExpenseListComponent,
     TableComponent

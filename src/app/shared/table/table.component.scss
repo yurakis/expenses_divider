@@ -1,14 +1,23 @@
 table {
   width: 100%;
+
+  td:not(:first-child) {
+    padding-left: 5px;
+  }
+
+  td:not(:last-child) {
+    padding-right: 5px;
+  }
 }
 
 .actions-header-cell {
-  width: 75px;
+  width: 80px;
   text-align: right;
 }
 
 .actions-cell {
   text-align: right;
+  white-space: nowrap;
 
   .mat-icon {
     font-size: 18px;

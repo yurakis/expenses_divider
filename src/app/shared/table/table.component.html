@@ -1,12 +1,17 @@
 <table [dataSource]="config.items" mat-table matSort #matTable>
   <ng-container *ngFor="let column of config.columns" [matColumnDef]="column.displayProperty">
     <th *matHeaderCellDef
-        [style.width]="column.width ? column.width + 'px' : 'auto'"
+        [style.maxWidth]="column.width ? column.width + '100%' : 'auto'"
         mat-header-cell
         mat-sort-header>
       {{column.displayName}}
     </th>
-    <td *matCellDef="let item" mat-cell>{{column.transformFn ? column.transformFn(item) : item[column.displayProperty]}}</td>
+    <td *matCellDef="let item"
+        [style.maxWidth]="column.width ? column.width + 'px' : 'auto'"
+        class="truncated-text"
+        mat-cell>
+      {{column.transformFn ? column.transformFn(item) : item[column.displayProperty]}}
+    </td>
   </ng-container>
   <ng-container *ngIf="config.actions" matColumnDef="actions">
     <th *matHeaderCellDef class="actions-header-cell" mat-header-cell>Actions</th>

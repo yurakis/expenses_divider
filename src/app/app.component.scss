@@ -1,7 +1,13 @@
 .container {
   background-color: #fff;
-  padding-top: 15px;
   padding-bottom: 15px;
+
+  ed-member-list,
+  ed-expense-list {
+    margin-top: 15px;
+    display: inline-block;
+    width: 100%;
+  }
 }
 
 ed-results {
